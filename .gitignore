@@ -2,4 +2,5 @@
 settings/config.py
 __pycache__
 logs/
+scripts/
 
