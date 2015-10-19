@@ -2,7 +2,6 @@
 
 from subprocess import Popen, PIPE
 from pwd import getpwuid
-from pathlib import Path
 import argparse
 import logging
 import traceback
@@ -21,16 +20,16 @@ from settings import config
 
 user_pastafari='root'
 
-if not hasattr(config, 'user_pastafari'):
-    user_pastafari='pastafari'
-else:
-    user_pastafari=config.user_pastafari
+#if not hasattr(config, 'user_pastafari'):
+#    user_pastafari='pastafari'
+#else:
+#    user_pastafari=config.user_pastafari
 
 if not hasattr(config, 'logs_pastafari'):
     logs='./logs'
 else:
     logs=config.logs_pastafari
-    
+
 if not hasattr(config, 'scripts_pastafari'):
     scripts_path='./scripts'
 else:
@@ -39,14 +38,6 @@ else:
 if user!=user_pastafari:
     print('Error, you need to be logged how root user for access to this script')
     exit(1)
-    
-#Create log directory
-
-if not os.path.isdir(logs):
-
-    p=Path(logs)
-
-    p.mkdir(0o755, True) 
 
 parser = argparse.ArgumentParser(description='An Simple daemon used for execute system scripts and return logs for info to servers')
 
@@ -63,8 +54,24 @@ args = parser.parse_args()
 try:
 
     #Create unique id for the log
-
-    script=Popen(scripts_path+'/'+args.script+' '+args.arguments, bufsize=-1, executable=None, stdin=None, stdout=PIPE, stderr=PIPE, preexec_fn=None, close_fds=True, shell=True, cwd=None, env=None, universal_newlines=False, startupinfo=None, creationflags=0, restore_signals=True, start_new_session=False, pass_fds=())
+    
+    script_interpreter=''
+    
+    file_line=open(scripts_path+'/'+args.script)      
+    
+    execute_line=file_line.readline()
+    
+    file_line.close()
+    
+    if args.arguments==None:
+        arguments=''
+    else:
+        arguments=args.arguments
+    
+    if execute_line.find("#!")==0:
+        script_interpreter=execute_line.replace('#!', '').strip()+' '
+    
+    script=Popen(script_interpreter+scripts_path+'/'+args.script+' '+arguments, bufsize=-1, executable=None, stdin=None, stdout=PIPE, stderr=PIPE, preexec_fn=None, close_fds=True, shell=True, cwd=None, env=None, universal_newlines=False, startupinfo=None, creationflags=0, restore_signals=True, start_new_session=False, pass_fds=())
 
     pid=str(os.getpid())
     
@@ -95,7 +102,8 @@ try:
     
     if script.returncode!=0:
         error=1
-        logging.info('{"EXIT_CODE": "'+str(script.returncode)+'", "CODE_ERROR": 1, "MESSAGE": "'+" ".join(arr_error)+'", "ERROR": '+str(error)+'}')
+        #logging.info('{"EXIT_CODE": "'+str(script.returncode)+'", "CODE_ERROR": 1, "MESSAGE": "'+" ".join(arr_error)+'", "ERROR": '+str(error)+'}')
+        logging.info('{"EXIT_CODE": "'+str(script.returncode)+'", "CODE_ERROR": 1, "MESSAGE": "'+" ".join(arr_error)+'", "ERROR": '+str(error)+', "PROGRESS": 100}')
     
 
 except:
