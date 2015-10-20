@@ -18,12 +18,10 @@ sys.path.append('.')
 
 from settings import config
 
-user_pastafari='pastafari'
-
-#if not hasattr(config, 'user_pastafari'):
-#    user_pastafari='pastafari'
-#else:
-#    user_pastafari=config.user_pastafari
+if not hasattr(config, 'user_pastafari'):
+    user_pastafari='pastafari'
+else:
+    user_pastafari=config.user_pastafari
 
 if not hasattr(config, 'logs_pastafari'):
     logs='./logs'
