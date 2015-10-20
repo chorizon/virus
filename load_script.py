@@ -57,4 +57,6 @@ result['UUID']=uuid
 
 result['MESSAGE']='Executing script...'
 
+result['PROGRESS']=0
+
 print(json.dumps(result))

@@ -18,7 +18,7 @@ sys.path.append('.')
 
 from settings import config
 
-user_pastafari='root'
+user_pastafari='pastafari'
 
 #if not hasattr(config, 'user_pastafari'):
 #    user_pastafari='pastafari'
@@ -36,7 +36,7 @@ else:
     scripts_path=config.scripts_pastafari
     
 if user!=user_pastafari:
-    print('Error, you need to be logged how root user for access to this script')
+    print('Error, you need to be logged how '+user_pastafari+' user for access to this script')
     exit(1)
 
 parser = argparse.ArgumentParser(description='An Simple daemon used for execute system scripts and return logs for info to servers')
