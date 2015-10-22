@@ -49,11 +49,16 @@ args = parser.parse_args()
 
 # Execute script
 
-try:
-
-    #Create unique id for the log
+logging.basicConfig(format='%(message)s', filename=logs+'/log_'+args.uuid,level=logging.INFO)
     
-    script_interpreter=''
+script_interpreter=''
+
+if not os.path.isfile(scripts_path+'/'+args.script):
+    logging.info('{"MESSAGE": "Scripts not exists......", "ERROR:" 1, "CODE_ERROR": 1, "EXIT_CODE": 1}')
+    exit(1)
+
+try:
+    
     
     file_line=open(scripts_path+'/'+args.script)      
     
@@ -74,8 +79,6 @@ try:
     pid=str(os.getpid())
     
     #logging.basicConfig(format='{"%(levelname)s": %(message)s}', filename=logs+'/log_'+args.uuid,level=logging.INFO)
-
-    logging.basicConfig(format='%(message)s', filename=logs+'/log_'+args.uuid,level=logging.INFO)
 
     logging.info('{"MESSAGE": "Running script server...", "ERROR:" 0, "CODE_ERROR": 0, "EXIT_CODE": 0}')
 
