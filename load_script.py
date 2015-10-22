@@ -38,6 +38,9 @@ script=os.path.basename(args.category)+'/'+os.path.basename(args.module)+'/'+os.
 
 params=args.params
 
+if params==None:
+	params=""
+
 python_command=args.python_command
 
 if python_command==None:
