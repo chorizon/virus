@@ -59,7 +59,7 @@ if user!=user_pastafari:
     exit(1)
 
 if not os.path.isfile(scripts_path+'/'+args.script):
-    logging.info('{"MESSAGE": "Scripts not exists......", "ERROR:" 1, "CODE_ERROR": 1, "EXIT_CODE": 1, "PROGRESS": 100}')
+    logging.info('{"MESSAGE": "Scripts not exists '+scripts_path+'/'+args.script+'", "ERROR:" 1, "CODE_ERROR": 1, "EXIT_CODE": 1, "PROGRESS": 100}')
     exit(1)
 
 try:
