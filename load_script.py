@@ -62,4 +62,6 @@ result['MESSAGE']='Executing script...'
 
 result['PROGRESS']=0
 
+result['COMMAND']=python_command+' daemon.py --script "'+script+'" --uuid '+uuid+' --arguments "'+params+'"'
+
 print(json.dumps(result))
