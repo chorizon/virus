@@ -19,7 +19,7 @@ else:
 
 uuid=args.uuid
 
-result={'ERROR': 1, 'MESSAGE': '', 'CODE_ERROR' : 0}
+result={'ERROR': 1, 'MESSAGE': '', 'CODE_ERROR' : 0, 'PROGRESS': 0}
 
 if os.path.isfile(logs+'/log_'+uuid):
     f=open(logs+'/log_'+uuid)
@@ -38,5 +38,9 @@ if os.path.isfile(logs+'/log_'+uuid):
         result['CODE_ERROR']=1
         
         result['MESSAGE']='Cannot load json message'
-
+else:
+    
+    result['CODE_ERROR']=1
+        
+    result['MESSAGE']='Cannot load json message'
 print(json.dumps(result))
