@@ -54,7 +54,7 @@ logging.basicConfig(format='%(message)s', filename=logs+'/log_'+args.uuid,level=
 script_interpreter=''
 
 if not os.path.isfile(scripts_path+'/'+args.script):
-    logging.info('{"MESSAGE": "Scripts not exists......", "ERROR:" 1, "CODE_ERROR": 1, "EXIT_CODE": 1}')
+    logging.info('{"MESSAGE": "Scripts not exists......", "ERROR:" 1, "CODE_ERROR": 1, "EXIT_CODE": 1, "PROGRESS": 100}')
     exit(1)
 
 try:
@@ -80,7 +80,7 @@ try:
     
     #logging.basicConfig(format='{"%(levelname)s": %(message)s}', filename=logs+'/log_'+args.uuid,level=logging.INFO)
 
-    logging.info('{"MESSAGE": "Running script server...", "ERROR:" 0, "CODE_ERROR": 0, "EXIT_CODE": 0}')
+    logging.info('{"MESSAGE": "Running script server...", "ERROR:" 0, "CODE_ERROR": 0, "EXIT_CODE": 0, "PROGRESS": 0}')
 
     for line in script.stdout:
         line=line.decode('utf-8').rstrip()
