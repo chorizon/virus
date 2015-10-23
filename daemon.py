@@ -30,6 +30,10 @@ args = parser.parse_args()
 
 # Execute script
 
+workdir=os.path.dirname(os.path.abspath(__file__))
+
+os.chdir(workdir)
+
 #Loading basic variables and setting logging
 
 if not hasattr(config, 'logs_pastafari'):
@@ -45,7 +49,7 @@ else:
     user_pastafari=config.user_pastafari
 
 if not hasattr(config, 'scripts_pastafari'):
-    scripts_path='./scripts'
+    scripts_path=workdir+'/scripts'
 else:
     scripts_path=config.scripts_pastafari
     
