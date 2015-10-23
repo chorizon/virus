@@ -4,6 +4,7 @@ from platform import python_version_tuple
 from settings import config
 import os
 import argparse
+import json
 
 parser = argparse.ArgumentParser(description='An Simple script for obtain info of a log')
 
@@ -38,3 +39,4 @@ if os.path.isfile(logs+'/log_'+uuid):
         
         result['MESSAGE']='Cannot load json message'
 
+print(json.dumps(result))
