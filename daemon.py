@@ -30,19 +30,19 @@ args = parser.parse_args()
 
 # Execute script
 
-logging.basicConfig(format='%(message)s', filename=logs+'/log_'+args.uuid,level=logging.INFO)
-
-#Loading basic variables
-
-if not hasattr(config, 'user_pastafari'):
-    user_pastafari='pastafari'
-else:
-    user_pastafari=config.user_pastafari
+#Loading basic variables and setting logging
 
 if not hasattr(config, 'logs_pastafari'):
     logs='./logs'
 else:
     logs=config.logs_pastafari
+
+logging.basicConfig(format='%(message)s', filename=logs+'/log_'+args.uuid,level=logging.INFO)
+
+if not hasattr(config, 'user_pastafari'):
+    user_pastafari='pastafari'
+else:
+    user_pastafari=config.user_pastafari
 
 if not hasattr(config, 'scripts_pastafari'):
     scripts_path='./scripts'
