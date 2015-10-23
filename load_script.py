@@ -5,6 +5,7 @@
 from platform import python_version_tuple
 from subprocess import Popen, PIPE
 from uuid import uuid4
+from settings import config
 import argparse
 import hashlib
 import os
@@ -46,7 +47,12 @@ python_command=args.python_command
 if python_command==None:
     python_command='/usr/bin/python3'
 
-args=[python_command+' daemon.py --script "'+script+'" --uuid '+uuid+' --arguments "'+params+'"']
+if not hasattr(config, 'daemon_path'):
+    daemon_path=''
+else:
+    daemon_path=config.daemon_path
+
+args=[python_command+' '+daemon_path+'daemon.py --script "'+script+'" --uuid '+uuid+' --arguments "'+params+'"']
 
 daemon=Popen(args, bufsize=-1, executable=None, stdin=PIPE, stdout=PIPE, stderr=PIPE, preexec_fn=None, close_fds=True, shell=True, cwd=None, env=None, universal_newlines=True, startupinfo=None, creationflags=0, restore_signals=True, start_new_session=True, pass_fds=())
 
@@ -62,6 +68,6 @@ result['MESSAGE']='Executing script...'
 
 result['PROGRESS']=0
 
-result['COMMAND']=python_command+' daemon.py --script "'+script+'" --uuid '+uuid+' --arguments "'+params+'"'
+#result['COMMAND']=python_command+' daemon.py --script "'+script+'" --uuid '+uuid+' --arguments "'+params+'"'
 
 print(json.dumps(result))
