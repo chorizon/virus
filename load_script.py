@@ -48,7 +48,7 @@ if python_command==None:
 
 args=[python_command+' daemon.py --script "'+script+'" --uuid '+uuid+' --arguments "'+params+'"']
 
-daemon=Popen(args, bufsize=-1, executable=None, stdin=None, stdout=None, stderr=None, preexec_fn=None, close_fds=True, shell=True, cwd=None, env=None, universal_newlines=True, startupinfo=None, creationflags=0, restore_signals=True, start_new_session=True, pass_fds=())
+daemon=Popen(args, bufsize=-1, executable=None, stdin=PIPE, stdout=PIPE, stderr=PIPE, preexec_fn=None, close_fds=True, shell=True, cwd=None, env=None, universal_newlines=True, startupinfo=None, creationflags=0, restore_signals=True, start_new_session=True, pass_fds=())
 
 #daemon.pid
 
