@@ -37,10 +37,14 @@ if os.path.isfile(logs+'/log_'+uuid):
         
         result['CODE_ERROR']=1
         
+        result['PROGRESS']=100
+        
         result['MESSAGE']='Cannot load json message'
 else:
     
+    result['PROGRESS']=100
+    
     result['CODE_ERROR']=1
         
-    result['MESSAGE']='Cannot load json message'
+    result['MESSAGE']='Cannot load json message, executed a task with this uuid?'
 print(json.dumps(result))
