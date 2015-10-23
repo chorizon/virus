@@ -18,6 +18,22 @@ sys.path.append('.')
 
 from settings import config
 
+parser = argparse.ArgumentParser(description='An Simple daemon used for execute system scripts and return logs for info to servers')
+
+parser.add_argument('--script', help='The script to execute', required=True)
+
+parser.add_argument('--uuid', help='The uuid of script', required=True)
+
+parser.add_argument('--arguments', help='The arguments of script')
+
+args = parser.parse_args()
+
+# Execute script
+
+logging.basicConfig(format='%(message)s', filename=logs+'/log_'+args.uuid,level=logging.INFO)
+
+#Loading basic variables
+
 if not hasattr(config, 'user_pastafari'):
     user_pastafari='pastafari'
 else:
@@ -34,24 +50,9 @@ else:
     scripts_path=config.scripts_pastafari
     
 if user!=user_pastafari:
-    print('Error, you need to be logged how '+user_pastafari+' user for access to this script')
+    #print('Error, you need to be logged how '+user_pastafari+' user for access to this script')
+    logging.info('{"MESSAGE": "Error, you need to be logged how "+user_pastafari+" user for access to this script.", "ERROR:" 1, "CODE_ERROR": 1, "EXIT_CODE": 1, "PROGRESS": 100}')
     exit(1)
-
-parser = argparse.ArgumentParser(description='An Simple daemon used for execute system scripts and return logs for info to servers')
-
-parser.add_argument('--script', help='The script to execute', required=True)
-
-parser.add_argument('--uuid', help='The uuid of script', required=True)
-
-parser.add_argument('--arguments', help='The arguments of script')
-
-args = parser.parse_args()
-
-# Execute script
-
-logging.basicConfig(format='%(message)s', filename=logs+'/log_'+args.uuid,level=logging.INFO)
-    
-script_interpreter=''
 
 if not os.path.isfile(scripts_path+'/'+args.script):
     logging.info('{"MESSAGE": "Scripts not exists......", "ERROR:" 1, "CODE_ERROR": 1, "EXIT_CODE": 1, "PROGRESS": 100}')
@@ -59,6 +60,7 @@ if not os.path.isfile(scripts_path+'/'+args.script):
 
 try:
     
+    script_interpreter=''
     
     file_line=open(scripts_path+'/'+args.script)      
     
