@@ -12,8 +12,12 @@ parser.add_argument('--uuid', help='The uuid of script', required=True)
 
 args = parser.parse_args()
 
+workdir=os.path.dirname(os.path.abspath(__file__))
+
+os.chdir(workdir)
+
 if not hasattr(config, 'logs_pastafari'):
-    logs='./logs'
+    logs=workdir+'/logs'
 else:
     logs=config.logs_pastafari
 
