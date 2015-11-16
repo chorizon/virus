@@ -55,7 +55,7 @@ else:
     
 if user!=user_pastafari:
     #print('Error, you need to be logged how '+user_pastafari+' user for access to this script')
-    logging.info('{"MESSAGE": "Error, you need to be logged how '+user_pastafari+' user for access to this script.", "ERROR:" 1, "CODE_ERROR": 1, "EXIT_CODE": 1, "PROGRESS": 100}')
+    logging.info('{"MESSAGE": "Error, you need to be logged how '+user_pastafari+' user for access to this script.", "ERROR": 1, "CODE_ERROR": 1, "EXIT_CODE": 1, "PROGRESS": 100}')
     exit(1)
 
 if not os.path.isfile(scripts_path+'/'+args.script):
@@ -86,7 +86,7 @@ try:
     
     #logging.basicConfig(format='{"%(levelname)s": %(message)s}', filename=logs+'/log_'+args.uuid,level=logging.INFO)
 
-    logging.info('{"MESSAGE": "Running script server...", "ERROR:" 0, "CODE_ERROR": 0, "EXIT_CODE": 0, "PROGRESS": 0}')
+    logging.info('{"MESSAGE": "Running script server...", "ERROR": 0, "CODE_ERROR": 0, "EXIT_CODE": 0, "PROGRESS": 0}')
 
     for line in script.stdout:
         line=line.decode('utf-8').rstrip()
