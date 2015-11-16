@@ -9,6 +9,7 @@ import json
 parser = argparse.ArgumentParser(description='An Simple script for obtain info of a log')
 
 parser.add_argument('--uuid', help='The uuid of script', required=True)
+parser.add_argument('--num_line', help='The line to read', required=False)
 
 args = parser.parse_args()
 
@@ -28,10 +29,23 @@ result={'ERROR': 1, 'MESSAGE': '', 'CODE_ERROR' : 0, 'PROGRESS': 0}
 if os.path.isfile(logs+'/log_'+uuid):
     f=open(logs+'/log_'+uuid)
     
+    arr_line=[]
+    
     for line in f:
-        pass
+        if line != "":
+            arr_line.append(line)
     
     f.close()
+    
+    if args.num_line==None:
+        num_line=len(arr_line)-1
+    else:
+        num_line=int(args.num_line)
+        
+        if num_line>=len(arr_line):
+            num_line=len(arr_line)-1
+
+    line=arr_line[num_line]
     
     try:
     
