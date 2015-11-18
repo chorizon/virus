@@ -48,6 +48,48 @@ def add_line(line, file_line):
             return False
         
 
+def del_line(file_line, file_name):
+
+    line_exists=0
+
+    arr_lines=[]
+
+    try:
+
+        f=open(file_name, 'r')
+
+    except:
+        
+        return False
+
+    for line in f:
+        line=line.strip()
+        
+        if line == args.line:
+            line_exists=1
+        else:
+            arr_lines.append(line)
+
+    f.close()
+
+    if line_exists==1:
+        
+        try:
+        
+            f=open(file_name, 'w')
+            
+            final_file="\n".join(arr_lines)
+            
+            f.write(final_file+"\n")
+                #print(line)
+            f.close()
+            
+            return True
+        
+        except:
+            
+            return False
+
 def add_user(username, home_base='/home', clean_user=True):
 
     user_folder=home_base+"/"+username
