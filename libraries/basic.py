@@ -100,7 +100,7 @@ def del_user(username):
         user_check=pwd.getpwnam(username)
         
         # Delete user home
-        
+        print("sudo userdel -r "+username)
         if subprocess.call("sudo userdel -r "+username,  shell=True) > 0:
             return False
         else:
