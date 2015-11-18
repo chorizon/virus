@@ -65,7 +65,7 @@ def del_line(file_line, file_name):
     for line in f:
         line=line.strip()
         
-        if line == args.line:
+        if line == file_line:
             line_exists=1
         else:
             arr_lines.append(line)
@@ -89,6 +89,26 @@ def del_line(file_line, file_name):
         except:
             
             return False
+    else:
+        
+        return False
+
+def delete_user(username):
+    
+    try:
+
+        user_check=pwd.getpwnam(username)
+        
+        # Delete user home
+        
+        if subprocess.call("sudo userdel --remove-home --remove-all-files "+username,  shell=True) > 0:
+            return False
+        else:
+            return True
+
+    except:
+        
+        return False
 
 def add_user(username, home_base='/home', clean_user=True):
 
