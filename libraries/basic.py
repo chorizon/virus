@@ -101,7 +101,7 @@ def del_user(username):
         
         # Delete user home
         
-        if subprocess.call("sudo deluser --remove-home "+username,  shell=True) > 0:
+        if subprocess.call("sudo userdel -r "+username,  shell=True) > 0:
             return False
         else:
             return True
