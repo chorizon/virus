@@ -93,7 +93,7 @@ def del_line(file_line, file_name):
         
         return False
 
-def delete_user(username):
+def del_user(username):
     
     try:
 
